@@ -4,7 +4,7 @@ from view.MenuRegister import MenuRegister
 
 class PresentationMenu:
     def showPresentationMenu(self):
-        questionary.text("************************ Bem Vindo ao Cinema ************************");
+        print("************************ Bem Vindo ao Cinema ************************")
 
 
         questionary.text("Cadastrar/Login")
