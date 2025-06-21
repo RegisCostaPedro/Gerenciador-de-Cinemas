@@ -1,8 +1,7 @@
 from enum import Enum;
 
-
 class Roles(Enum):
-    COMMON = 1; 
+    COMMON = 0; 
     ADMIN = 1;
     
 
@@ -14,22 +13,40 @@ class Database:
         self.tb_room = tb_room;
         self.tb_session = tb_session;
 
-    def insert(self,table,obj):
+    @staticmethod
+    def insert(table, obj):
         table.append(obj);
    
-    def get(self,table):
+    @staticmethod
+    def get(table):
         for register in table:
             for key,value in register.items():
                 print(f"{key}: {value}");
-            
-        print();
-        
-connection = Database([
-    {
-        "login": "admin",
-        "password": "admin",
-        "role": Roles.ADMIN.name 
-    }
-    ],[],[],[],[]);
+            print();     
 
-   
+    @staticmethod
+    def update(table, id, obj):
+        for register in table:
+            if (register.get('id') == id):
+                   register.update(obj);
+
+    @staticmethod
+    def delete(table, id):
+        for register in table:
+            if (register.get('id') == id):
+                   table.remove(register);
+        
+    @staticmethod
+    def getNewID(table):
+        return table[len(table) - 1].get('id') + 1;
+        
+# Iniciando banco de dados com as tabelas vazias
+connection = Database([], [], [], [], []);
+
+# Criando usuário Admin
+Database.insert(connection.tb_user, {
+    'id': 1,
+    'login': 'admin',
+    'password': 'admin',
+    'role': Roles.ADMIN
+});
