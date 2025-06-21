@@ -38,8 +38,12 @@ class Database:
         
     @staticmethod
     def getNewID(table):
-        return table[len(table) - 1].get('id') + 1;
-
+        try:
+            lastIndex = table[len(table) - 1];
+            return table[len(table) - 1].get('id') + 1;
+        except:
+            return 1;
+        
     @staticmethod
     def authenticateUser(tb_user, userObj):
         for user in tb_user:
