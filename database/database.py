@@ -39,7 +39,19 @@ class Database:
     @staticmethod
     def getNewID(table):
         return table[len(table) - 1].get('id') + 1;
-        
+
+    @staticmethod
+    def authenticateUser(tb_user, userObj):
+        for user in tb_user:
+            if (user.get('login') == userObj.get('login') and user.get('password') == userObj.get('password')):
+                return True;
+        return False;
+
+    @staticmethod
+    def userIsAdmin(userObj):
+        if (userObj.get('role').value != 1): return False;
+        return True;
+
 # Iniciando banco de dados com as tabelas vazias
 connection = Database([], [], [], [], []);
 
