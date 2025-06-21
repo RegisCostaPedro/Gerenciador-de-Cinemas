@@ -4,18 +4,19 @@ from view.MenuRegister import MenuRegister
 
 class PresentationMenu:
     def showPresentationMenu(self):
-        print("************************ Bem Vindo ao Cinema ************************")
+        questionary.print(f"─ ⊹ ⊱ CINE ˗ˏˋ ★ ˎˊ˗ BIGOR  ⊰ ⊹ ─",style="blink fg:#fff bg:black bold")
 
 
         questionary.text("Cadastrar/Login")
 
         authMethod =  questionary.select(
+           
             "Selecione Login ou Cadastro",
             choices=[
                 'Login',
                 'Cadastro'
-            ]
-            
+            ],
+             qmark="✮",
         ).ask()
         
     

@@ -1,10 +1,13 @@
 import questionary
-
+from services.UserService import UserService;
+from database.database import connection,Database
 class MenuLogin:
     def showMenu(self):
         userAuth = questionary.form(
-            name=questionary.text("Name: "),
-            password=questionary.password("Password: ")
+            
+            name=questionary.text("Nome: "),
+            password=questionary.password("Senha: ")
         ).ask()
-        print('User log',userAuth)
+        
+        UserService.authenticateUser(userAuth)
       

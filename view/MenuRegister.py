@@ -1,10 +1,16 @@
 import questionary
-
+from services.UserService import UserService;
+from database.database import connection,Database
+from view.MenuHome import Home
 class MenuRegister:
     def showMenu(self):
-        userRegistred = questionary.form(
-            name=questionary.text("Name: "),
-            password=questionary.password("Password: ")
+        userData = questionary.form(
+            name=questionary.text("Nome: "),
+            password=questionary.password("Senha: ")
         ).ask()
-        print('User registred',userRegistred)
-      
+        
+        userRegistred = UserService.registerUser(userData)
+        if userRegistred:
+            home = Home()
+            home.showMenuHome();
+            
