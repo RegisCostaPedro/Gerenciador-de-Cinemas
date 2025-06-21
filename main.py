@@ -1,5 +1,8 @@
+from view.PresententionMenu import PresentationMenu
+
 def main():
-    print("Olá mundo")
+    presentationMenu = PresentationMenu()
+    presentationMenu.showPresentationMenu()
     
 if __name__ =="__main__":
-    main()  
+    main()      
