@@ -48,7 +48,7 @@ class Database:
     def authenticateUser(tb_user, userObj):
         for user in tb_user:
             if (user.get('login') == userObj.get('login') and user.get('password') == userObj.get('password')):
-                return True;
+                return user;
         return False;
 
     @staticmethod
