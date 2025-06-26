@@ -1,11 +1,11 @@
 import questionary
 from services.UserService import UserService;
 from database.database import connection,Database
-from view.MenuHome import Home
+from view.menu.MenuHome import Home
 class MenuRegister:
     def showMenu(self):
         userData = questionary.form(
-            name=questionary.text("Nome: "),
+            login=questionary.text("Nome: "),
             password=questionary.password("Senha: ")
         ).ask()
         

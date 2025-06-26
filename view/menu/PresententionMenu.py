@@ -1,6 +1,6 @@
 import questionary;
-from view.MenuLogin import MenuLogin
-from view.MenuRegister import MenuRegister
+from view.menu.MenuLogin import MenuLogin
+from view.menu.MenuRegister import MenuRegister
 
 class PresentationMenu:
     def showPresentationMenu(self):
