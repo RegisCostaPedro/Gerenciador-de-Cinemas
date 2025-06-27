@@ -44,6 +44,8 @@ class SessionPage:
             print(f"Data: {session.get('date')}");
             print(f"Filme: {session.get('movie')}");
             print(f"Sala: {session.get('room')}");
+            print(f"Ingressos disponíveis: {session.get('tickets')}");
+            print(f"Ingressos comprados: {len(session.get('users'))}");
             print();
         else:
             print("Nenhuma sessão registrada...");
@@ -118,8 +120,12 @@ class SessionPage:
              return self.showSessionPage();
          
         choices = [f"{session.get('id')} - {session.get('movie')} - {session.get('room')} - {session.get('date')}" for session in sessionsList];
+        choices.append("←- Voltar");
 
         sessionSelected= questionary.select(message="", choices = choices).ask();
+
+        if sessionSelected == "←- Voltar":
+             return self.showSessionPage();
        
         print(".............................................................")
         
@@ -144,7 +150,7 @@ class SessionPage:
              questionary.print("Nenhuma sessão registrada...");
              print();
              questionary.confirm(message="←- Voltar",instruction=" (⏎)").ask();
-             return self.showRoomPage();
+             return self.showSessionPage();
          
         for session in sessionsList:
             print(f"Id: {session.get('id')}");
@@ -154,8 +160,12 @@ class SessionPage:
             print();
 
         choices = [f"{session.get('id')} - {session.get('movie')} - {session.get('room')} - {session.get('date')}" for session in sessionsList];
+        choices.append("←- Voltar");
 
         sessionSelected= questionary.select(message="", choices = choices).ask();
+
+        if sessionSelected == "←- Voltar":
+             return self.showSessionPage();
        
         print();
         print("⋆.˚ ──────────────────────── Atualize as Informações da Sessão ─────────────────────── ⋆.˚\n")

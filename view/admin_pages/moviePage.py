@@ -45,7 +45,7 @@ class MoviePage:
 
         movieList = MovieService.getMovies();
 
-        if movieList:
+        if len(movieList) < 1:
             for movies in movieList:
                 print(f"Id: {movies.get('id')}")
                 print(f"Filme: {movies.get('name')}")
@@ -89,8 +89,13 @@ class MoviePage:
              questionary.confirm(message="←- Voltar",instruction=" (⏎)").ask()
              return self.showMoviePage()
          
-        choices = [f"{movie.get('id')} - {movie.get('name')}" for movie in movieList]
-        movieSelected= questionary.select(message="",choices=choices).ask()
+        choices = [f"{movie.get('id')} - {movie.get('name')}" for movie in movieList];
+        choices.append("←- Voltar");
+
+        movieSelected= questionary.select(message="",choices=choices).ask();
+
+        if movieSelected == "←- Voltar":
+            return self.showMoviePage();
        
         print(".............................................................")
         idToBeDeleted= movieSelected.split(' - ')[0]
@@ -119,8 +124,14 @@ class MoviePage:
             print(f"Duração: {movies.get('duration')}")
             print(f"Categoria: {movies.get('category')}")
             print();
+
         choices = [f"{movie.get('id')} - {movie.get('name')}" for movie in movieList]
+        choices.append("←- Voltar");
+        
         movieSelected= questionary.select(message="",choices=choices).ask()
+
+        if movieSelected == "←- Voltar":
+            return self.showMoviePage();
        
         print("\n")
         print("⋆.˚ ──────────────────────── Atualize as Informações do Filme ─────────────────────── ⋆.˚\n")

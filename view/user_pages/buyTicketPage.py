@@ -11,10 +11,11 @@ class BuyTicketPage:
 
         sessionsList = SessionService.getDisponibleSessionsJoin();
 
+        print();
         if not sessionsList:
             questionary.print("Nenhuma sessão disponível...");
-            print();
             questionary.confirm(message="←- Voltar",instruction=" (⏎)").ask();
+
             from view.menu.MenuHome import Home;
             home = Home();
             return home.showMenuHome();
@@ -24,11 +25,18 @@ class BuyTicketPage:
             print(f"Data: {session.get('date')}");
             print(f"Filme: {session.get('movie')}");
             print(f"Sala: {session.get('room')}");
+            print(f"Ingressos disponíveis: {session.get('tickets')}");
             print();
 
         choices = [f"{session.get('id')} - {session.get('movie')} - {session.get('room')} - {session.get('date')}" for session in sessionsList];
+        choices.append("←- Voltar");
 
         sessionSelected= questionary.select(message="", choices = choices).ask();
+
+        if sessionSelected == "←- Voltar":
+            from view.menu.MenuHome import Home;
+            home = Home();
+            return home.showMenuHome();
 
         sessionId = sessionSelected.split(' - ')[0];
 

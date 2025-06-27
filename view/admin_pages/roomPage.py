@@ -84,8 +84,12 @@ class RoomPage:
              return self.showRoomPage();
          
         choices = [f"{room.get('id')} - {room.get('name')}" for room in roomList];
+        choices.append("←- Voltar");
 
         roomSelected= questionary.select(message="", choices=choices).ask();
+
+        if roomSelected == "←- Voltar":
+             return self.showRoomPage();
        
         print(".............................................................")
         
@@ -119,8 +123,12 @@ class RoomPage:
             print();
 
         choices = [f"{room.get('id')} - {room.get('name')}" for room in roomList];
+        choices.append("←- Voltar");
 
         roomSelected= questionary.select(message="", choices=choices).ask();
+
+        if roomSelected == "←- Voltar":
+             return self.showRoomPage();
        
         print();
         print("⋆.˚ ──────────────────────── Atualize as Informações da Sala ─────────────────────── ⋆.˚\n")

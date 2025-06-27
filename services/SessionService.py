@@ -24,7 +24,7 @@ class SessionService:
 
       return disponibleSessionsList;
 
-    def getSessionsJoin(sessionList):
+    def getSessionsJoin():
       roomsList = RoomService.getRooms();
       moviesList = MovieService.getMovies();
 
@@ -35,10 +35,12 @@ class SessionService:
         sessionObj = {};
         sessionObj['id'] = session.get('id');
         sessionObj['date'] = session.get('date');
+        sessionObj['users'] = session.get('users');
 
         for room in roomsList:
           if (room.get('id') == session.get('room_id')):
             sessionObj['room'] = room.get('name');
+            sessionObj['tickets'] = int(room.get('seatsQuantity')) - int(len(session.get('users')));
 
         for movie in moviesList:
           if (movie.get('id') == session.get('movie_id')):
@@ -64,6 +66,7 @@ class SessionService:
         for room in roomsList:
           if (room.get('id') == session.get('room_id')):
             sessionObj['room'] = room.get('name');
+            sessionObj['tickets'] = int(room.get('seatsQuantity')) - int(len(session.get('users')));
 
         for movie in moviesList:
           if (movie.get('id') == session.get('movie_id')):
@@ -86,11 +89,15 @@ class SessionService:
 
       session.update({ "users": sessionUsers });
       SessionService.updateSession(sessionId, session);
-      print(connection.tb_session);
 
     def getUserSessions(userId):
-      sessionsList = SessionService.getDisponibleSessionsJoin();
+      sessionsList = SessionService.getSessionsJoin();
       userSessions = [session for session in sessionsList if userId in session.get('users')];
+
+      for session in userSessions:
+        userTickets = session.get('users').count(userId);
+        session['tickets'] = userTickets;
+
       return userSessions;
     
 

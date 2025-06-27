@@ -1,6 +1,6 @@
-import questionary
+import questionary;
 from services.MovieService import MovieService;
-from helpers import clearScream
+from helpers import clearScream;
 
 class UserMoviePage:
     def showMoviePage(self):
