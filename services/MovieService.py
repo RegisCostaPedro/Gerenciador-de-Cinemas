@@ -16,4 +16,6 @@ class MovieService:
 
     def deleteMovie(idMovie):
         return Database.delete(connection.tb_movie, idMovie);
+    def updateMovie(idMovie,obj):
+        return Database.update(connection.tb_movie, idMovie,obj);
 

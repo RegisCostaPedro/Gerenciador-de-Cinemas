@@ -14,7 +14,6 @@ class MenuLogin:
 
             userAuthenticated = UserService.authenticateUser(userAuth);
           
-            
             if userAuthenticated is not None and userAuthenticated is not False:
                     home = Home();
                     UserIsAdmin = UserService.checkIfUserIsAdmin(userAuthenticated);

@@ -29,7 +29,8 @@ class Database:
     def update(table, id, obj):
         for register in table:
             if (register.get('id') == id):
-                   register.update(obj);
+                 register.update(obj);
+                 return  True;
 
     @staticmethod
     def delete(table, id):

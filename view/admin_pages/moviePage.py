@@ -8,7 +8,6 @@ import time
 from helpers import clearScream
 
      
-
 class MoviePage:
     def showMoviePage(self):
        
@@ -20,6 +19,7 @@ class MoviePage:
             choices=[
                 'Adicionar Filme',
                 'Listar Filmes',
+                'Atualizar Filme',
                 'Remover Filme',
                 'Voltar'
             ],
@@ -31,6 +31,8 @@ class MoviePage:
                 return self.showRegisterMoviePage()
             case "Listar Filmes":
                 return self.showListMoviesPage()
+            case 'Atualizar Filme':
+                return self.showUpdateMoviePage()
             case 'Remover Filme':
                 return self.showRemoveMoviePage()
             case 'Voltar':
@@ -76,6 +78,11 @@ class MoviePage:
         questionary.print("Selecione um filme para excluir do catálogo")
        
         movieList = MovieService.getMovies();
+        if not movieList:
+             questionary.print("Nenhum filme disponível no catálogo.")
+             questionary.confirm(message="←- Voltar",instruction=" (⏎)").ask()
+             return self.showMoviePage()
+         
         choices = [f"{movie.get('id')} - {movie.get('name')}" for movie in movieList]
         movieSelected= questionary.select(message="",choices=choices).ask()
        
@@ -85,5 +92,43 @@ class MoviePage:
         
         if movieDeleted:
             questionary.print(" ✖ Filme removido do catálogo!")
+            time.sleep(1.5)
+            return self.showMoviePage()
+        
+    def showUpdateMoviePage(self):
+        clearScream.Helpers.clearScreen()
+        questionary.print("⋆⭒˚｡⋆ Filmes em Cartaz ⋆⭒˚｡⋆\n\n")
+        questionary.print("Selecione um filme no catálogo para editá-lo")
+       
+        movieList = MovieService.getMovies();
+        if not movieList:
+             questionary.print("Nenhum filme disponível no catálogo.")
+             questionary.confirm(message="←- Voltar",instruction=" (⏎)").ask()
+             return self.showMoviePage()
+         
+        for movies in movieList:
+            print(f"Id: {movies.get('id')}")
+            print(f"Filme: {movies.get('name')}")
+            print(f"Ano de Lançamento: {movies.get('releaseYear')}")
+            print(f"Duração: {movies.get('duration')}")
+            print(f"Categoria: {movies.get('category')}")
+            print();
+        choices = [f"{movie.get('id')} - {movie.get('name')}" for movie in movieList]
+        movieSelected= questionary.select(message="",choices=choices).ask()
+       
+        print(".............................................................\n\n")
+        print("⋆.˚ ──────────────────────── Atualize as Informações do Filme ─────────────────────── ⋆.˚\n")
+        
+        movieData = questionary.form(
+                    name=questionary.text("Nome: "),
+                    duration=questionary.text("Duração: "),
+                    category=questionary.text("Categoria: "),
+                    releaseYear=questionary.text("Ano de Lançamento: "),
+                ).ask()
+        idToBeUpdated= movieSelected.split(' - ')[0]
+        movieUpdate =MovieService.updateMovie(int(idToBeUpdated),movieData);
+        
+        if movieUpdate:
+            questionary.print(" ₊⊹ Filme atualizado com sucesso! ₊⊹")
             time.sleep(1.5)
             return self.showMoviePage()
