@@ -10,6 +10,10 @@ class RoomService:
       roomList = Database.get(connection.tb_room);
       return roomList;
 
+    def getRoomById(id):
+      room = Database.getById(connection.tb_room, id);
+      return room;
+
     def deleteRoom(id):
         return Database.delete(connection.tb_room, id);
 
