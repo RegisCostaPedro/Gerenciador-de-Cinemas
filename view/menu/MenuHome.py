@@ -1,5 +1,6 @@
 import questionary
 from services.UserService import UserService;
+from view.user_pages.userMoviePage import UserMoviePage
 from view.admin_pages.moviePage import MoviePage
 from view.admin_pages.roomPage import RoomPage
 from view.admin_pages.sessionPage import SessionPage
@@ -22,16 +23,25 @@ class Home:
                 qmark="✮",
                 
             ).ask();
-        
-            if choice == "Sair":
-                question = questionary.select("Deseja Mesmo Sair?",choices=[
-                    "Sim","Não"
-                ], qmark="✮").ask();
-                if question == "Sim":
-                    from view.menu.PresententionMenu import PresentationMenu
-                    presentation = PresentationMenu()
-                    presentation.showPresentationMenu()
-                    break;
+
+            movie = UserMoviePage();
+
+            match choice:
+                case  "Filmes em Cartaz":
+                    return movie.showMoviePage();
+                case "Sessões":
+                     return session.showSessionPage();
+                case "Salas":
+                     return room.showRoomPage();
+                case  "Sair":
+                    question = questionary.select("Deseja Mesmo Sair?",choices=[
+                        "Sim","Não"
+                    ], qmark="✮").ask();
+                    if question == "Sim":
+                        from view.menu.PresententionMenu import PresentationMenu
+                        presentation = PresentationMenu()
+                        presentation.showPresentationMenu()
+                        break;
                 
     def showMenuHomeAdmin(self):
          clearScream.Helpers.clearScreen()

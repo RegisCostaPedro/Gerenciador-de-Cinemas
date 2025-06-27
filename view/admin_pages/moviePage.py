@@ -7,7 +7,6 @@ from database.database import connection, Database
 import time
 from helpers import clearScream
 
-     
 class MoviePage:
     def showMoviePage(self):
        
@@ -45,14 +44,20 @@ class MoviePage:
         questionary.print("⋆⭒˚｡⋆ Filmes em Cartaz ⋆⭒˚｡⋆\n\n")
 
         movieList = MovieService.getMovies();
-        for movies in movieList:
-            print(f"Id: {movies.get('id')}")
-            print(f"Filme: {movies.get('name')}")
-            print(f"Ano de Lançamento: {movies.get('releaseYear')}")
-            print(f"Duração: {movies.get('duration')}")
-            print(f"Categoria: {movies.get('category')}")
-            print()
-        print(".............................................................")
+
+        if movieList:
+            for movies in movieList:
+                print(f"Id: {movies.get('id')}")
+                print(f"Filme: {movies.get('name')}")
+                print(f"Ano de Lançamento: {movies.get('releaseYear')}")
+                print(f"Duração: {movies.get('duration')}")
+                print(f"Categoria: {movies.get('category')}")
+                print()
+            else:
+                print("Nenhum filme registrado...");
+
+        print(".............................................................");
+        
         questionary.confirm(message="←- Voltar",instruction=" (⏎)").ask()
         return self.showMoviePage()
     

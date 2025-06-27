@@ -77,19 +77,3 @@ Database.insert(connection.tb_user, {
     'password': 'admin',
     'role': Roles.ADMIN
 });
-
-# Criando usuário Admin
-Database.insert(connection.tb_movie, {
-    'id': 1,
-    'name': 'regis',
-    'releaseYear': 2025,
-    'category': 'Ação',
-    'duration': '1h30'
-});
-
-# Criando usuário Admin
-Database.insert(connection.tb_room, {
-    'id': 1,
-    'name': 'Sala 20L',
-    'assentsCapacity': 200,
-});
