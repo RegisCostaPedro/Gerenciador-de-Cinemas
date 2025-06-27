@@ -45,7 +45,7 @@ class MoviePage:
 
         movieList = MovieService.getMovies();
 
-        if len(movieList) < 1:
+        if movieList:
             for movies in movieList:
                 print(f"Id: {movies.get('id')}")
                 print(f"Filme: {movies.get('name')}")
