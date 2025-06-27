@@ -2,6 +2,7 @@ import questionary;
 from view.menu.MenuLogin import MenuLogin
 from view.menu.MenuRegister import MenuRegister
 from helpers import clearScream
+
 class PresentationMenu:
     def showPresentationMenu(self):
         clearScream.Helpers.clearScreen()
