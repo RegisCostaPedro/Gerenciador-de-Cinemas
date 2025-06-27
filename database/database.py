@@ -29,13 +29,16 @@ class Database:
     def update(table, id, obj):
         for register in table:
             if (register.get('id') == id):
-                   register.update(obj);
+                 register.update(obj);
+                 return  True;
 
     @staticmethod
     def delete(table, id):
         for register in table:
             if (register.get('id') == id):
-                   table.remove(register);
+                    table.remove(register);
+                    return True
+                   
         
     @staticmethod
     def getNewID(table):
