@@ -6,10 +6,9 @@ class Roles(Enum):
     
 
 class Database:
-    def __init__(self, tb_user,tb_movie,tb_catalog,tb_room,tb_session):
+    def __init__(self, tb_user, tb_movie, tb_room, tb_session):
         self.tb_user = tb_user;
         self.tb_movie = tb_movie;
-        self.tb_catalog = tb_catalog;
         self.tb_room = tb_room;
         self.tb_session = tb_session;
 
@@ -24,6 +23,13 @@ class Database:
         for register in table:
             result.append(register)
         return result    
+
+    @staticmethod
+    def getById(table):
+        for register in table:
+            if (register.get('id') == id):
+                 return register;
+        return False;
 
     @staticmethod
     def update(table, id, obj):
@@ -62,7 +68,7 @@ class Database:
         return True;
 
 # Iniciando banco de dados com as tabelas vazias
-connection = Database([], [], [], [], []);
+connection = Database([], [], [], []);
 
 # Criando usuário Admin
 Database.insert(connection.tb_user, {
@@ -70,4 +76,20 @@ Database.insert(connection.tb_user, {
     'login': 'admin',
     'password': 'admin',
     'role': Roles.ADMIN
+});
+
+# Criando usuário Admin
+Database.insert(connection.tb_movie, {
+    'id': 1,
+    'name': 'regis',
+    'releaseYear': 2025,
+    'category': 'Ação',
+    'duration': '1h30'
+});
+
+# Criando usuário Admin
+Database.insert(connection.tb_room, {
+    'id': 1,
+    'name': 'Sala 20L',
+    'assentsCapacity': 200,
 });
