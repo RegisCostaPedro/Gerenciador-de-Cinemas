@@ -1,10 +1,13 @@
 import questionary
 from services.UserService import UserService;
-
+from view.admin_pages.moviePage import MoviePage
+from helpers import clearScream
 
 class Home:
     def showMenuHome(self):
         while True:
+            
+            clearScream.Helpers.clearScreen()
             choice =  questionary.select(
             "O Que Você Deseja Acessar Hoje?",
             
@@ -29,6 +32,7 @@ class Home:
                     break;
                 
     def showMenuHomeAdmin(self):
+         clearScream.Helpers.clearScreen()
          while True:
             choice =  questionary.select(
             "O Que Você Deseja Acessar Hoje?",
@@ -42,10 +46,10 @@ class Home:
                 qmark="✮",
                 
             ).ask();
-           
+            movie = MoviePage();
             match choice:
                 case  "Filmes":
-                    return "Filmes page";
+                    return movie.showMoviePage();
                 case "Sessões":
                      return "Sessões page";
                 case "Salas":

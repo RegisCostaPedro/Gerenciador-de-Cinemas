@@ -7,3 +7,4 @@ services/__pycache__/
 database/__pycache__/
 view/__pycache__/
 view/menu/__pycache__/
+.idea

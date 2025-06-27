@@ -16,13 +16,14 @@ class Database:
     @staticmethod
     def insert(table, obj):
         table.append(obj);
+        return True;
    
     @staticmethod
     def get(table):
+        result = []
         for register in table:
-            for key,value in register.items():
-                print(f"{key}: {value}");
-            print();     
+            result.append(register)
+        return result    
 
     @staticmethod
     def update(table, id, obj):
@@ -43,6 +44,7 @@ class Database:
             return table[len(table) - 1].get('id') + 1;
         except:
             return 1;
+
         
     @staticmethod
     def authenticateUser(tb_user, userObj):
