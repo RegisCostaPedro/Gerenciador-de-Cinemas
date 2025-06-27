@@ -45,6 +45,7 @@ class Database:
         except:
             return 1;
 
+        
     @staticmethod
     def authenticateUser(tb_user, userObj):
         for user in tb_user:
