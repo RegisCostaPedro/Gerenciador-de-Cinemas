@@ -69,6 +69,7 @@ class MoviePage:
         movieSaved = MovieService.registerMovie(movieData)
         if movieSaved:
             questionary.print("✮ Filme salvo com sucesso! ✮")
+            questionary.print("Aguarde, redirecionando... ✮");
             time.sleep(1.5)
             return self.showMoviePage()
 
