@@ -116,7 +116,7 @@ class MoviePage:
         choices = [f"{movie.get('id')} - {movie.get('name')}" for movie in movieList]
         movieSelected= questionary.select(message="",choices=choices).ask()
        
-        print(".............................................................\n\n")
+        print("\n")
         print("⋆.˚ ──────────────────────── Atualize as Informações do Filme ─────────────────────── ⋆.˚\n")
         
         movieData = questionary.form(
