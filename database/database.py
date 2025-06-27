@@ -35,7 +35,9 @@ class Database:
     def delete(table, id):
         for register in table:
             if (register.get('id') == id):
-                   table.remove(register);
+                    table.remove(register);
+                    return True
+                   
         
     @staticmethod
     def getNewID(table):

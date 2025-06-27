@@ -41,35 +41,49 @@ class MoviePage:
     def showListMoviesPage(self):
         clearScream.Helpers.clearScreen()
         questionary.print("⋆⭒˚｡⋆ Filmes em Cartaz ⋆⭒˚｡⋆\n\n")
-        print(".............................................................")
-        MovieService.getMovies();
+
+        movieList = MovieService.getMovies();
+        for movies in movieList:
+            print(f"Id: {movies.get('id')}")
+            print(f"Filme: {movies.get('name')}")
+            print(f"Ano de Lançamento: {movies.get('releaseYear')}")
+            print(f"Duração: {movies.get('duration')}")
+            print(f"Categoria: {movies.get('category')}")
+            print()
         print(".............................................................")
         questionary.confirm(message="←- Voltar",instruction=" (⏎)").ask()
         return self.showMoviePage()
-      
+    
         
     def showRegisterMoviePage(self):
         clearScream.Helpers.clearScreen()
         questionary.print("Digite as Informações do Filme")
         movieData = questionary.form(
-            nome=questionary.text("Nome: "),
-            duracao=questionary.text("Duração: "),
-            categoria=questionary.text("Categoria: "),
-            ano=questionary.text("Ano de Lançamento: "),
+            name=questionary.text("Nome: "),
+            duration=questionary.text("Duração: "),
+            category=questionary.text("Categoria: "),
+            releaseYear=questionary.text("Ano de Lançamento: "),
         ).ask()
         movieSaved = MovieService.registerMovie(movieData)
         if movieSaved:
-            questionary.print("Filme salvo com sucesso! ✮")
-            time.sleep(2)
+            questionary.print("✮ Filme salvo com sucesso! ✮")
+            time.sleep(1.5)
             return self.showMoviePage()
 
     def showRemoveMoviePage(self):
         clearScream.Helpers.clearScreen()
         questionary.print("⋆⭒˚｡⋆ Filmes em Cartaz ⋆⭒˚｡⋆\n\n")
         questionary.print("Selecione um filme para excluir do catálogo")
+       
+        movieList = MovieService.getMovies();
+        choices = [f"{movie.get('id')} - {movie.get('name')}" for movie in movieList]
+        movieSelected= questionary.select(message="",choices=choices).ask()
+       
         print(".............................................................")
+        idToBeDeleted= movieSelected.split(' - ')[0]
+        movieDeleted =MovieService.deleteMovie(int(idToBeDeleted));
         
-      
-        
-        print(".............................................................")
-        
+        if movieDeleted:
+            questionary.print(" ✖ Filme removido do catálogo!")
+            time.sleep(1.5)
+            return self.showMoviePage()
