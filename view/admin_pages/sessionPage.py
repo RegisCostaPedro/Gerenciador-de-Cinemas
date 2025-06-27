@@ -92,6 +92,7 @@ class SessionPage:
 
         sessionObj['movie_id'] = int(idMovie);
         sessionObj['room_id'] = int(idRoom);
+        sessionObj['users'] = [];
 
         SessionService.registerSession(sessionObj);
 

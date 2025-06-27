@@ -1,8 +1,7 @@
 import questionary;
 from services.UserService import UserService;
-from database.database import connection,Database;
+from database.database import connection, Database;
 from view.menu.MenuHome import Home
-
 
 class MenuLogin:
     def showMenu(self):
@@ -17,7 +16,10 @@ class MenuLogin:
             if userAuthenticated is not None and userAuthenticated is not False:
                     home = Home();
                     UserIsAdmin = UserService.checkIfUserIsAdmin(userAuthenticated);
-                
+
+                    from helpers.persistUserId import setUserId;
+                    setUserId(userAuthenticated.get('id'));
+                    
                     match UserIsAdmin:
                         case True:
                             return home.showMenuHomeAdmin();

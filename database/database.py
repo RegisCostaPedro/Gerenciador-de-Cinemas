@@ -25,7 +25,7 @@ class Database:
         return result    
 
     @staticmethod
-    def getById(table):
+    def getById(table, id):
         for register in table:
             if (register.get('id') == id):
                  return register;
