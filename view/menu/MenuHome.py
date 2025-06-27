@@ -1,6 +1,7 @@
 import questionary
 from services.UserService import UserService;
 from view.admin_pages.moviePage import MoviePage
+from view.admin_pages.roomPage import RoomPage
 from helpers import clearScream
 
 class Home:
@@ -47,13 +48,14 @@ class Home:
                 
             ).ask();
             movie = MoviePage();
+            room = RoomPage();
             match choice:
                 case  "Filmes":
                     return movie.showMoviePage();
                 case "Sessões":
                      return "Sessões page";
                 case "Salas":
-                     return "Salas page";
+                     return room.showRoomPage();
                 case  "Sair":
                     question = questionary.select("Deseja Mesmo Sair?",choices=[
                         "Sim","Não"
