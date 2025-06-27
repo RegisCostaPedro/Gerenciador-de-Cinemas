@@ -3,8 +3,7 @@ class UserService:
     
     def registerUser(obj):
       obj['role'] = Roles.COMMON;
-         
-      print('USUÁRIO ', obj)
+      obj['id'] = Database.getNewID(connection.tb_user);
       Database.insert(connection.tb_user,obj);
       return Database.authenticateUser(connection.tb_user,obj);
     
