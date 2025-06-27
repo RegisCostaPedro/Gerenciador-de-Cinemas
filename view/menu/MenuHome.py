@@ -2,6 +2,7 @@ import questionary
 from services.UserService import UserService;
 from view.admin_pages.moviePage import MoviePage
 from view.admin_pages.roomPage import RoomPage
+from view.admin_pages.sessionPage import SessionPage
 from helpers import clearScream
 
 class Home:
@@ -47,13 +48,16 @@ class Home:
                 qmark="✮",
                 
             ).ask();
+
             movie = MoviePage();
             room = RoomPage();
+            session = SessionPage();
+
             match choice:
                 case  "Filmes":
                     return movie.showMoviePage();
                 case "Sessões":
-                     return "Sessões page";
+                     return session.showSessionPage();
                 case "Salas":
                      return room.showRoomPage();
                 case  "Sair":
